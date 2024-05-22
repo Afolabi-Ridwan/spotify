@@ -1,0 +1,50 @@
+.menu{
+    display: flex;
+    color: white;
+    height: 70px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(210, 210, 210, 0.2);
+    padding: 0 30px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+}
+
+form{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(91, 88, 85, 0.6);
+    padding: 5px 10px;
+    background-color: rgb(91, 88, 85, 0.4);
+    border-radius: 10px;
+    
+}
+
+input{
+    width: 400px;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: rgb(91, 88, 85);
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+
+.searchIcon{
+    font-weight: lighter;
+    font-size: 17px;
+    color: rgb(91, 88, 85);
+}
+
+.user{
+    background-color: blueviolet;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-weight: 500;
+}

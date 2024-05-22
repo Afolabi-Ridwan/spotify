@@ -1,0 +1,35 @@
+body{
+    background-color: black;
+}
+
+.container{
+    margin: 0 30px;
+}
+
+.leftArrow, .rightArrow{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: white 1px solid;
+    color: white;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.navArrow{
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+}
+
+.sliderCont{
+    max-width: 80vw;
+    position: absolute;
+    right: 0;
+}
+
+.images{
+    border-radius: 30%;
+    width: 90%;
+}
