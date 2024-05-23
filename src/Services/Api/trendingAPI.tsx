@@ -16,13 +16,14 @@ const Trending: React.FC<TrendingComponent> = ({
   updateErrorState
 }) => {
   const [userCountry, setUserCountry] = useState(null);
-  // const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const filterCountry = countries.filter(
     (eachCountry) =>
       userCountry !== null && eachCountry.name.includes(userCountry)
   );
 
+  
   useEffect(() => {
     UserLocation(setUserCountry);
     console.log(userCountry);
@@ -54,15 +55,15 @@ const Trending: React.FC<TrendingComponent> = ({
           
 
 
-          // if (response.ok) {
-          //   // setLoadingHandler(true);
+          if (response.ok) {
+            // setLoadingHandler(true);
           // setLoadingHandler(true)
 
-          // } else {
-          //   updateErrorState(true);
-          //   console.log(errorMessage);
-          //   // setLoadingHandler(true);
-          // }
+          } else {
+            updateErrorState(true);
+            console.log(errorMessage);
+            // setLoadingHandler(true);
+          }
         } 
         catch (error: any) {
           console.error(error);

@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {Menu}  from "../../../Components/Menu/menu";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 interface props {
   resultHandler: null | any;
@@ -14,6 +14,7 @@ interface props {
 
 const Ui: React.FC<props> =  ({resultHandler, errorState}) => {
   const sliderRef = useRef<Slider>(null);
+  
 
   const topTenResults = resultHandler.length > 1 && resultHandler.filter((each: any, index: any) => index < 10 && each)
   console.log(topTenResults);
@@ -68,8 +69,8 @@ const Ui: React.FC<props> =  ({resultHandler, errorState}) => {
         </button>
       </div>
 
-     {/* {!errorState ?  */}
-       {resultHandler.length > 1 ? (
+     {!errorState ? 
+       resultHandler.length > 1 ? (
         <div className="sliderCont">
           <Slider ref={sliderRef} {...settings}>
             {topTenResults.map((eachResult: any) => (
@@ -87,8 +88,9 @@ const Ui: React.FC<props> =  ({resultHandler, errorState}) => {
         </div>
       ) : (
         <h1 style={{ color: "white" }}> Loading....</h1>
-      )}
-      {/* : <h1 style={{color: "white"}}> Error </h1>} */}
+      )
+      : <h1 style={{color: "white"}}> Error </h1>}
+      
     </div>
     </div>
   );
