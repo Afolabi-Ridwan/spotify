@@ -1,0 +1,68 @@
+.container p {
+  color: white;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.container p:first-of-type{
+    font-size: 19px;
+    font-weight: 500;
+}
+
+
+.container ul {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
+}
+
+.container {
+  max-width: 70vw;
+  position: absolute;
+  right: 0;
+}
+
+.container.partyPlaylistsContainer{
+  margin-top: 450px;
+}
+
+
+
+.container.biggerContainer,
+.container.partyPlaylistsContainer.biggerContainer{
+  max-width: 80vw;
+}
+
+.container img {
+  border-radius: 10px;
+  width: 90%;
+}
+
+.container li {
+  max-width: auto;
+}
+
+.container .imageCont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#typeAndArtiste{
+  color: rgb(197, 194, 194);
+  text-transform: capitalize;
+}
+
+@media(max-width: 900px){
+  .container {
+    max-width: 80vw;
+    position: absolute;
+    right: 0;
+  }
+
+  .partyPlaylistsContainer{
+    
+    margin-top: 500px;
+  }
+}

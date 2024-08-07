@@ -1,26 +1,66 @@
 import "./menu.css";
-import { FaBars, FaSearch } from "react-icons/fa";
+import {
+  getToken,
+  searchArtist,
+  getAlbums,
+} from "../../Services/Api/getArtistesID";
+import backwardIcon from "../../Assets/Images/back.JPG"
+import { MenuTypes } from "../types";
 
-export const Menu = () => {
+export const Menu: React.FC<MenuTypes> = ({
+  setErrorHandler,
+  setAlbumsHandler,
+  setArtistName,
+  artistName,
+  setSearchState,
+}) => {
+  const handleSearch = async (e: any) => {
+    e.preventDefault();
+    console.log(artistName);
+    try {
+      const accessToken = await getToken();
+      const artist = await searchArtist(accessToken, artistName);
+      if (!artist) {
+        setErrorHandler("Artist not found");
+        setAlbumsHandler([]);
+        return;
+      }
+      const albums = await getAlbums(accessToken, artist.id);
+      setSearchState(true);
+      setAlbumsHandler(albums);
+      setErrorHandler(null);
+    } catch (err) {
+      setErrorHandler("Failed to fetch albums");
+    }
+  };
+
+  const inputHandler = (value: string) => {
+    setArtistName(value)    
+  }
+
   return (
-    <>
-      <div className="menu">
-        <div className="header">
-          <FaBars />
-          <p> Spotify Muzik</p>
+    <div>
+      <div id="menuContainer">
+        <div>
+          <div> Spotify Muzik</div>
         </div>
 
-        <form >
-          <div className="searchIcon">
-            <FaSearch/>
-          </div>
-          <input placeholder="Search songs, albums, artists, podcasts" />
-        </form>
+        <div className="menu">
+          <form onSubmit={handleSearch}>
+            
+            <input
+              placeholder="Search songs, albums, artists, podcasts"
+              onChange={(e) => inputHandler(e.target.value)}
+              value={ artistName}
+            />
+            <div className="backwardIcon">
+              <img src={backwardIcon} alt="backward" />
+            </div>
+          </form>
 
-        <p className="user">A</p>
+          <p className="user">A</p>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
-
-// export default Menu

@@ -1,50 +1,94 @@
-.menu{
-    display: flex;
-    color: white;
-    height: 70px;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(210, 210, 210, 0.2);
-    padding: 0 30px;
+#menuContainer .menu {
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.header{
-    display: flex;
-    align-items: center;
+#menuContainer .header {
+  display: flex;
+  align-items: center;
 }
 
-form{
-    height: 30px;
-    display: flex;
-    align-items: center;
-    border: 1px solid rgba(91, 88, 85, 0.6);
-    padding: 5px 10px;
-    background-color: rgb(91, 88, 85, 0.4);
-    border-radius: 10px;
-    
+#menuContainer form {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(91, 88, 85, 0.6);
+  padding: 5px 10px;
+  background-color: rgb(91, 88, 85, 0.4);
+  border-radius: 10px;
 }
 
-input{
-    width: 400px;
-    height: 100%;
-    background-color: transparent;
-    outline: none;
+#menuContainer input {
+  width: 400px;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: white;
+  /* color: rgb(91, 88, 85); */
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+#menuContainer .searchIcon {
+  font-weight: lighter;
+  font-size: 17px;
+  color: rgb(91, 88, 85);
+}
+
+#menuContainer .user {
+  background-color: blueviolet;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-weight: 500;
+}
+
+#menuContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#menuContainer div:first-of-type {
+  display: none;
+}
+
+#menuContainer .backwardIcon {
+  position: absolute;
+  left: 10px;
+  cursor: pointer;
+  color: rgba(231, 231, 231, 0.7);
+}
+
+#menuContainer .backwardIcon img {
+  width: 30px;
+}
+
+@media (max-width: 900px) {
+  #menuContainer .menu {
+    justify-content: right;
+    width: initial;
+  }
+
+  #menuContainer {
+    display: none;
+  }
+
+  #menuContainer form {
+    background: none;
     border: none;
-    color: rgb(91, 88, 85);
-    margin-left: 10px;
-    font-size: 15px;
-}
+  }
 
+  #menuContainer input {
+    display: none;
+  }
 
-.searchIcon{
-    font-weight: lighter;
-    font-size: 17px;
-    color: rgb(91, 88, 85);
-}
-
-.user{
-    background-color: blueviolet;
-    border-radius: 50%;
-    padding: 3px 7px;
-    font-weight: 500;
+  #menuContainer .searchIcon {
+    background: none;
+    color: white;
+    font-size: 18px;
+  }
 }

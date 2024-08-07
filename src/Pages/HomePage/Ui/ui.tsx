@@ -3,95 +3,109 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import {Menu}  from "../../../Components/Menu/menu";
+import { Menu } from "../../../Components/Menu/menu";
 import { useRef, useState } from "react";
+import NewReleases from "../NewReleases/newReleases";
+import { settings } from "../../../Providers/sliderSetting";
+import Navbar from "../../../Components/Navbar/navbar";
+import TopMobileMenu from "../../../Components/Menu/TopMobileMenu/topMobileMenu";
+import SearchResult from "../SearchResult/searchResult";
 
-interface props {
-  resultHandler: null | any;
-  errorState: boolean;
-}
-
-
-const Ui: React.FC<props> =  ({resultHandler, errorState}) => {
+import { UiProps } from "../../types";
+import PartyPlaylists from "../PartyPlaylists/partyPlaylists";
+const Ui: React.FC<UiProps> = ({ resultHandler, errorState, errorHandler }) => {
   const sliderRef = useRef<Slider>(null);
-  
 
-  const topTenResults = resultHandler.length > 1 && resultHandler.filter((each: any, index: any) => index < 10 && each)
+  const topTenResults =
+    resultHandler?.length > 1 &&
+    resultHandler?.filter((each: any, index: any) => index < 10 && each);
   console.log(topTenResults);
 
-  
-
-  const settings = {
-    dots: false,
-    slidesToShow: 5,
-    slidesToScroll: 5,
-    initialSlide: 0,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 1124,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 580,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-  
+  const [albums, setAlbums] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [artistName, setArtistName] = useState<string>("");
+  const [searchState, setSearchState] = useState<boolean | null>(null);
+  const [barsToggleState, setBarsToggleState] = useState(false);
 
   return (
-    <div >
-      <Menu/>
-      <div className="container">
-      <div className="navArrow">
-        <button onClick={() => sliderRef.current?.slickPrev()} className="leftArrow">
-          <FaChevronLeft />
-        </button>
-        <button onClick={() => sliderRef.current?.slickNext()} className="rightArrow">
-          <FaChevronRight />
-        </button>
-      </div>
-
-     {!errorState ? 
-       resultHandler.length > 1 ? (
-        <div className="sliderCont">
-          <Slider ref={sliderRef} {...settings}>
-            {topTenResults.map((eachResult: any) => (
-              
-              <div key={eachResult.trackMetadata.displayImageUri}>
-                <img
-                  className="images"
-                  src={eachResult.trackMetadata.displayImageUri}
-                  alt="thumbnail"
-                />
-                <h3 style={{color: "white", textAlign: "center"}}> {eachResult.trackMetadata.trackName}</h3>
-              </div>
-            ))}
-          </Slider>
+    <div id="homePageUi">
+      <div>
+        <div>
+          <Navbar
+            searchStateHandler={setSearchState}
+            setArtistName={setArtistName}
+            barsToggleState={barsToggleState}
+            setBarsToggleState={setBarsToggleState}
+          />
+          <TopMobileMenu />
         </div>
-      ) : (
-        <h1 style={{ color: "white" }}> Loading....</h1>
-      )
-      : <h1 style={{color: "white"}}> Error </h1>}
-      
-    </div>
+        <div className={`container ${barsToggleState && "biggerContainer"}`}>
+          <Menu
+            setErrorHandler={setError}
+            setAlbumsHandler={setAlbums}
+            setArtistName={setArtistName}
+            artistName={artistName}
+            setSearchState={setSearchState}
+            searchState={searchState}
+          />
+
+          {resultHandler?.length > 1 ? (
+            <div>
+              <div className="navArrow">
+                <button
+                  onClick={() => sliderRef.current?.slickPrev()}
+                  className="leftArrow"
+                >
+                  <FaChevronLeft />
+                </button>
+                <button
+                  onClick={() => sliderRef.current?.slickNext()}
+                  className="rightArrow"
+                >
+                  <FaChevronRight />
+                </button>
+              </div>
+
+              <div className="sliderCont">
+                <Slider ref={sliderRef} {...settings}>
+                  {topTenResults.map((eachResult: any) => (
+                    <div key={eachResult.trackMetadata.displayImageUri}>
+                      <img
+                        className="images"
+                        src={eachResult.trackMetadata.displayImageUri}
+                        alt="thumbnail"
+                      />
+                      <h3 style={{ color: "white", textAlign: "center" }}>
+                        {" "}
+                        {eachResult.trackMetadata.trackName}
+                      </h3>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
+          ) : (
+            <div>
+              {!searchState ? (
+                <div>
+                  <NewReleases
+                    errorState={errorState}
+                    errorHandler={errorHandler}
+                    barsToggleState={barsToggleState}
+                  />
+                    <PartyPlaylists barsToggleState={barsToggleState}/>
+                </div>
+              ) : (
+                <SearchResult
+                  albums={albums}
+                  error={error}
+                  artistName={artistName}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,13 @@
 body{
-    /* background-color: black; */
+    background-color: black;
+}
+
+#homepage h1{
+    color: rgb(255, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 

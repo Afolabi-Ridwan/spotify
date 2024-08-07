@@ -1,10 +1,20 @@
 body{
     background-color: black;
+   
+}
+
+#homePageUi{
+    display: flex;
 }
 
 .container{
-    margin: 0 30px;
+    padding: 0 30px;
+    width: 70vw;
 }
+
+.container.biggerContainer{
+    width: 80vw;
+  }
 
 .leftArrow, .rightArrow{
     height: 30px;
@@ -24,7 +34,6 @@ body{
 }
 
 .sliderCont{
-    max-width: 80vw;
     position: absolute;
     right: 0;
 }
